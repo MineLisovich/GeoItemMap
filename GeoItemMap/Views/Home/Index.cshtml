@@ -1,0 +1,29 @@
+﻿@*@model GeoItemViewModel
+    @if (Model.GeoItems.Count() > 0)
+         {
+             @foreach (var obj in Model.GeoItems)
+             {
+                 <p>ID: @obj.Id</p>
+                 <p>X: @obj.X</p>
+                 <p>Y:@obj.Y</p>
+                 <p>Description: @obj.Description</p>
+                 <a  asp-controller="Home" asp-action="Del" asp-route-id=@obj.Id>Удалить</a>
+             }
+         }*@
+
+
+<!--<div class="area">
+    <div class="conteiner">-->
+@*<div class="map">
+      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ad1a48cb8ffeeaa5ba0924d97c445e14576501432bfeac8fb0ea637368a8691ee&amp;source=constructor" width="958" height="720" frameborder="0"></iframe>
+    </div>*@
+<!--<div class="controlB">
+            <form asp-controller="Home" asp-action="Add" method="post">
+                <button type="submit">Добавить метку</button>
+            </form>
+        </div>
+    </div>
+
+</div>-->
+
+

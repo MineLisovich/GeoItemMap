@@ -1,0 +1,26 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+.area {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.conteiner {
+    width: 75%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.map {
+    width: 100%;
+}
+
+.controlB form {
+    margin: 5px;
+}
+
