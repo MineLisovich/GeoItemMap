@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using GeoItemMap.DataBase.Entities;
+using System.Web;
 
 
 namespace GeoItemMap.Controllers
@@ -22,10 +23,10 @@ namespace GeoItemMap.Controllers
             _db = db;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        public IActionResult Index()
+        {
+            return View();
+        }
         [HttpGet]
         public async Task<JsonResult> GetData()
         {
@@ -33,16 +34,18 @@ namespace GeoItemMap.Controllers
             GeoItemViewModel viewModel = new GeoItemViewModel { GeoItems = geoItems.ToList() };
             return Json(viewModel);
         }
-        public async Task<IActionResult> Index()
-        {
-            IEnumerable<GeoItem> geoItems = await dataManager.GeoItem.GetAllItem();
 
-            GeoItemViewModel viewModel = new GeoItemViewModel
-            {
-                GeoItems = geoItems.ToList()
-            };
-            return View(viewModel);
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    IEnumerable<GeoItem> geoItems = await dataManager.GeoItem.GetAllItem();
+
+        //    GeoItemViewModel viewModel = new GeoItemViewModel
+        //    {
+        //        GeoItems = geoItems.ToList()
+        //    };
+           
+        //    return View(viewModel);
+        //}
 
 
         [HttpPost]

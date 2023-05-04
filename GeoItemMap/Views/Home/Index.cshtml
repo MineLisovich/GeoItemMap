@@ -26,36 +26,73 @@
 
 </div>-->
 
-@model GeoItemViewModel
+<div class="controlB">
+    <form asp-controller="Home" asp-action="Add" method="post">
+        <button type="submit">Добавить метку</button>
+    </form>
+</div>
 
 <div id="YMapsID" style="width:1500px;height:800px"></div>
 
+
 <script type="text/javascript">
+
     // Создает обработчик события window.onLoad
     YMaps.jQuery(function () {
-        // Создает экземпляр карты и привязывает его к созданному контейнеру
-        var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
-        map.addControl(new YMaps.TypeControl());
-        map.addControl(new YMaps.TypeControl());
-        map.addControl(new YMaps.ToolBar());
-        map.addControl(new YMaps.Zoom());
-        map.addControl(new YMaps.MiniMap());
-        map.addControl(new YMaps.ScaleLine());
-        // Устанавливает начальные параметры отображения карты: центр карты и коэффициент масштабирования
-        map.setCenter(new YMaps.GeoPoint(27.56, 53.90), 10);
+        $.ajax({
+            url: "https://localhost:44337/Home/GetData",
+            type: "GET",
+            success: function (data) {
+
+                console.log(data);
+
+                // Создает экземпляр карты и привязывает его к созданному контейнеру
+                var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
+                map.addControl(new YMaps.TypeControl());
+                map.addControl(new YMaps.TypeControl());
+                map.addControl(new YMaps.ToolBar());
+                map.addControl(new YMaps.Zoom());
+                map.addControl(new YMaps.MiniMap());
+                map.addControl(new YMaps.ScaleLine());
+                // Устанавливает начальные параметры отображения карты: центр карты и коэффициент масштабирования
+                map.setCenter(new YMaps.GeoPoint(27.56, 53.90), 10);
+             
+
+                for (var obj in data) {
+                   
+
+                    for (i = 0; i < data[obj].length; i++) {
+                        console.log(data[obj][i]);
+                    }
+
+                        // Создает метку в центре Минска
+                        var placemark = new YMaps.Placemark(new YMaps.GeoPoint(obj.X, obj.Y));
+                       
+                        // Устанавливает содержимое балуна
+                        placemark.name = obj.Id;
+                        placemark.description = obj.Description;
+                        // Добавляет метку на карту
+                        map.addOverlay(placemark);   
+                }
+                
+                 
+                    
+                
+                // Создает метку в центре Минска
+                var placemark = new YMaps.Placemark(new YMaps.GeoPoint(27.56, 53.90));
+                // Устанавливает содержимое балуна
+                placemark.name = "Минск";
+                placemark.description = "С";
+                // Добавляет метку на карту
+                map.addOverlay(placemark);
+
+            }
+        });
+      
+       
+   
 
 
-
-
-
-        // Создает метку в центре Минска
-        var placemark = new YMaps.Placemark(new YMaps.GeoPoint(27.56, 53.90));
-
-        // Устанавливает содержимое балуна
-        placemark.name = "Минск";
-        placemark.description = "С";
-
-        // Добавляет метку на карту
-        map.addOverlay(placemark);
     })
+
 </script>
