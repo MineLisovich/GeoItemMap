@@ -13,33 +13,24 @@
         });
 
         $.ajax({
-            url: "https://localhost:44337/Home/GetData",
-            type: "GET",
-            success: function (data) {
-                console.log(data);
+            url: 'https://localhost:44337/Home/PostData',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            success: function (result) {
+                for (var i in result.geoItems) {
 
-                for (var i in data.geoItems) {
-                    console.log(data.geoItems[i].x);
-
-                    var myPlacemark = new ymaps.Placemark([data.geoItems[i].x, data.geoItems[i].y], {
-                        // Задаем содержимое балуна метки.
-                        // Это содержимое будет отображаться при клике по кластеру.
-                        balloonContentHeader: 'Метка № ' + data.geoItems[i].id + '(ID from DB)' ,
-                        balloonContentBody: 'Описание:' + data.geoItems[i].description + '<br>' + 'Координаты: <br>' + 'X- ' + data.geoItems[i].x + ' Y- ' + data.geoItems[i].y
+                    var myPlacemark = new ymaps.Placemark([result.geoItems[i].x, result.geoItems[i].y], {
+                        balloonContentHeader: 'Метка № ' + result.geoItems[i].id + '(ID from DB)',
+                        balloonContentBody: 'Описание:' + result.geoItems[i].description + '<br>' + 'Координаты: <br>' + 'X- ' + result.geoItems[i].x + ' Y- ' + result.geoItems[i].y
                     });
                     myMap.geoObjects.add(myPlacemark);
                 }
             }
+
         });
 
-        var myPlacemark = new ymaps.Placemark([53.90, 27.56], {
-            // Задаем содержимое балуна метки.
-            // Это содержимое будет отображаться при клике по кластеру.
-            balloonContentHeader: 'Метка № 1',
-            balloonContentBody:123
-        });
- 
-        myMap.geoObjects.add(myPlacemark);
     });
 
     

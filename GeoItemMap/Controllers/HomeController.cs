@@ -27,25 +27,16 @@ namespace GeoItemMap.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public async Task<JsonResult> GetData()
+    
+
+        [HttpPost]
+        public async Task<JsonResult> PostData()
         {
             IEnumerable<GeoItem> geoItems = await dataManager.GeoItem.GetAllItem();
             GeoItemViewModel viewModel = new GeoItemViewModel { GeoItems = geoItems.ToList() };
             return Json(viewModel);
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    IEnumerable<GeoItem> geoItems = await dataManager.GeoItem.GetAllItem();
-
-        //    GeoItemViewModel viewModel = new GeoItemViewModel
-        //    {
-        //        GeoItems = geoItems.ToList()
-        //    };
-           
-        //    return View(viewModel);
-        //}
 
 
         [HttpPost]
@@ -70,6 +61,11 @@ namespace GeoItemMap.Controllers
 
             dataManager.GeoItem.DeleteGeoItem(model.Id);
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Page2()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
