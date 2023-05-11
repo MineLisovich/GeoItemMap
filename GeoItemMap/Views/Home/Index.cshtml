@@ -9,7 +9,8 @@
     ymaps.ready(function () {
         var myMap = new ymaps.Map("YMapsID", {
             center: [53.90, 27.56],
-            zoom: 1
+            zoom: 11
+         
          
         }, {
             restrictMapArea: [
@@ -17,7 +18,14 @@
                 [49.77185323695446, 39.58331354601873]
             ]
         });
-        myMap.setZoom(20, { duration: 9000 }).then(() => myMap.setZoom(20,{duration:90000}));
+        var zoomControl = new ymaps.control.ZoomControl({
+            options: {
+               
+                zoomStep: 1,
+                zoomDuration:1000
+            }
+        });
+        myMap.controls.add(zoomControl);
 
        
         // Загрузим регионы.
